@@ -14,19 +14,45 @@ const inquirer = require("inquirer");
 //import fs
 const fs = require("fs");
 
-//import 'shapechoice function
-const shapes = require("./lib/shapes");
+//import classes of shapes
+const Shapes = require("./lib/shapes");
+const Triangle = require("./lib/triangle");
+const Square = require("./lib/square");
+const Circle = require("./lib/circle");
+
+//create new instances of the needed shapes
+
+const circle = new Circle(
+    'circle',
+    '',
+    `<circle cx="25" cy="75" r="20" fill="${this.color}"/>`,
+    3,    
+);
+
+const square = new Square(
+    'square',
+    '',
+    `<rect  width="100%" height="100%" fill="${this.color}"/>`,
+    true,
+);
+
+const triangle = new Triangle(
+    'triangle',
+    '',
+    `<polygon points="0,100 50,25 50,75 100,0" fill=${this.color}/>`,
+    'black',
+);
 
 
 //create array for shapeChoices
 const shapeChoices = ["circle", "square", "triangle"];
 
-checkLength = () => {
-    if (answer.characters.length > 3) {
-        console.log("Logos only have up to 3 characters. Please try again.");
-        return
-    }
-}
+// checkLength = () => {
+//     if (answer.characters.length > 3) {
+//         console.log("Logos only have up to 3 characters. Please try again.");
+//         return
+//     }
+// }
 
 inquirer
     .prompt([
@@ -53,14 +79,14 @@ inquirer
         },
     ])
     .then((answer) => {
-
-        
-        const svg = `<svg version="1.1"
-        width="300" height="200"
-        xmlns="http://www.w3.org/2000/svg">
-        ${shapeCode}<text x="10" y="10" font-weight="bold" fill="${answer.textColour}">${answer.characters}</text>
-        </svg>`
-        fs.writeFile('logo.svg', svg, (err) =>
+        console.log(answer);
+        const printOut = JSON.stringify(answer);
+        // const svg = `<svg version="1.1"
+        // width="300" height="200"
+        // xmlns="http://www.w3.org/2000/svg">
+        // ${shapeCode}<text x="10" y="10" font-weight="bold" fill="${answer.textColour}">${answer.characters}</text>
+        // </svg>`
+        fs.writeFile('logo.svg', printOut, (err) =>
         err ? console.error(err)
         : console.log('Generated logo.svg'));
         console.log("Generated logo.svg");
@@ -73,6 +99,5 @@ inquirer
             console.log("something else went wrong");
         }
     });
-
 
 

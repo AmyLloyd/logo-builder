@@ -1,7 +1,7 @@
 {
   "name": "logo-builder",
   "version": "1.0.0",
-  "description": "",
+  "description": "A commandline SVG file creator.",
   "main": "index.js",
   "directories": {
     "example": "examples",
@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
     "jest": "^29.7.0"
   }
 }
