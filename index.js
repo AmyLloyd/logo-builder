@@ -39,7 +39,7 @@ const square = new Square(
 const triangle = new Triangle(
     'triangle',
     '',
-    `<polygon points="0,100 50,25 50,75 100,0" fill=${this.color}/>`,
+    `<polygon points="150, 18 244, 182 56, 182" fill=${this.color}/>`,
     'black',
 );
 
