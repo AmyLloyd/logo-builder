@@ -20,30 +20,6 @@ const Triangle = require("./lib/triangle");
 const Square = require("./lib/square");
 const Circle = require("./lib/circle");
 
-//create new instances of the needed shapes
-
-const circle = new Circle(
-    'circle',
-    '',
-    `<circle cx="25" cy="75" r="20" fill="${this.color}"/>`,
-    3,    
-);
-
-const square = new Square(
-    'square',
-    '',
-    `<rect  width="100%" height="100%" fill="${this.color}"/>`,
-    true,
-);
-
-const triangle = new Triangle(
-    'triangle',
-    '',
-    `<polygon points="150, 18 244, 182 56, 182" fill=${this.color}/>`,
-    'black',
-);
-
-
 //create array for shapeChoices
 const shapeChoices = ["circle", "square", "triangle"];
 
@@ -79,14 +55,22 @@ inquirer
         },
     ])
     .then((answer) => {
-        console.log(answer);
-        const printOut = JSON.stringify(answer);
+        const shape = answer.shape;
+        console.log(answer.shape);
+        chooseFunction(shape);
+    //Stuck here with undefined shape
+        console.log(chooseFunction());
+        shape.setColor();
+        shape.render();
+        console.log(shape.render());
+
+
         // const svg = `<svg version="1.1"
         // width="300" height="200"
         // xmlns="http://www.w3.org/2000/svg">
         // ${shapeCode}<text x="10" y="10" font-weight="bold" fill="${answer.textColour}">${answer.characters}</text>
         // </svg>`
-        fs.writeFile('logo.svg', printOut, (err) =>
+        fs.writeFile('logo.svg', answer, (err) =>
         err ? console.error(err)
         : console.log('Generated logo.svg'));
         console.log("Generated logo.svg");
@@ -100,4 +84,16 @@ inquirer
         }
     });
 
+function chooseFunction(shape) {
+    if(shape === "triangle") {
+        shape = new Triangle;
+        return shape;
+    } else if (shape === "square") {
+        shape = new Square;
+        return shape;
+    } else if (shape === "circle") {
+        shape = new Circle;
+        return shape;
+    }
+}
 
